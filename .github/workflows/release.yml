@@ -23,11 +23,11 @@ jobs:
           echo "VERSION: $VERSION"
           export RELEASES=$(gh release list -O desc -L 1 --json name -q '.[].name' )
           echo "RELEASES: $RELEASES"
-          if [[ $RELEASES =~ $VERSION ]]; then
-            export VERSION=${VERSION}_1
-          else
-            export VERSION=$(echo $VERSION | sed -E 's/(.*_)([0-9]+)/echo "\1$((\2+1))"/e')
-          fi
+          #if [[ $RELEASES =~ $VERSION ]]; then
+          #  export VERSION=${VERSION}_1
+          #else
+          #  export VERSION=$(echo $VERSION | sed -E 's/(.*_)([0-9]+)/echo "\1$((\2+1))"/e')
+          #fi
           echo ::set-output name=version::${VERSION}
           echo "Version set to ${VERSION}"
         env:
