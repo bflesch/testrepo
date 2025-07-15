@@ -18,7 +18,7 @@ jobs:
         id: calver
         run: |
           export VERSION=$(date "+%Y.%m.%d")
-          gh release view -q .name | grep -v $VERSION
+          gh release view --json name -q .name | grep -v $VERSION
           if [[ $? -eq 0 ]]; then
             export VERSION=${VERSION}_1
           else
