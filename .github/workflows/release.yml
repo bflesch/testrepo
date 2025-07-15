@@ -26,6 +26,8 @@ jobs:
           fi
           echo ::set-output name=version::${VERSION}
           echo "Version set to ${VERSION}"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - uses: release-drafter/release-drafter@v6
         with:
           version: ${{ steps.calver.outputs.version }}
