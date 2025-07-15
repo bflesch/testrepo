@@ -28,10 +28,14 @@ jobs:
           else
             export VERSION=$(echo $VERSION | sed -E 's/(.*_)([0-9]+)/echo "\1$((\2+1))"/e')
           fi
-          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo version=${VERSION} >> $GITHUB_OUTPUT
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - uses: release-drafter/release-drafter@v6
+      - name: Test release version
+        run: |
+          echo "TESTED VERSION: ${{ steps.calver.outputs.version }}"
+      - name: Draft release
+        uses: release-drafter/release-drafter@v6
         with:
           version: ${{ steps.calver.outputs.version }}
         env:
