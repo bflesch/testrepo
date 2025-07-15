@@ -20,6 +20,8 @@ jobs:
         id: calver
         run: |
           export VERSION=$(date "+%Y.%m.%d")
+          echo "VERSION: $VERSION"
+          echo $(gh release list -O desc -L 1 --json name -q [].name )
           gh release list -O desc -L 1 --json name -q [].name | grep -v $VERSION
           if [[ $? -eq 0 ]]; then
             export VERSION=${VERSION}_1
