@@ -28,8 +28,7 @@ jobs:
           else
             export VERSION=$(echo $VERSION | sed -E 's/(.*_)([0-9]+)/echo "\1$((\2+1))"/e')
           fi
-          echo ::set-output name=version::${VERSION}
-          echo "Version set to ${VERSION}"
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - uses: release-drafter/release-drafter@v6
